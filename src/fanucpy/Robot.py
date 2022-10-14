@@ -120,6 +120,21 @@ class Robot(ABC):
 
         return ins_pwr
 
+    def get_reg(self) -> float:
+        """Gets register value.
+
+        Returns:
+            float: mm.
+        """
+
+        cmd = "getreg"
+        _, msg = self.send_cmd(cmd)
+
+        # Fanuc returns in kW. Should be adjusted to other robots.
+        reg = float(msg)
+
+        return reg
+
     def get_curpos(self):
         """Gets current cartesian position of tool center point.
 
